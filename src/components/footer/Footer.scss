@@ -1,0 +1,25 @@
+//EEECDA rgb(238, 236, 218)
+//F08A5D rgb(240, 138, 93)
+//B83B5E rgb(184, 59, 94)
+//6A2C70 rgb(106, 44, 112)
+
+.footer {
+  background-color: #f08a5d;
+  margin-top: 40px;
+  /* height: 40vh */;
+  h4{
+    font-family: Roboto;
+    text-align: center;
+    padding-top: 25px;
+  }
+  .col {
+    color: #6a2c70;
+    font-size: 18px;
+    font-family: Cuprum;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    margin: 0 auto;
+    padding-top: 20px;
+  }
+}

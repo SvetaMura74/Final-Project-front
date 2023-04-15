@@ -1,0 +1,30 @@
+//EEECDA rgb(238, 236, 218)
+//F08A5D rgb(240, 138, 93)
+//B83B5E rgb(184, 59, 94)
+//6A2C70 rgb(106, 44, 112)
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.navbar {
+  background-color: #eeecda;
+  
+  img {
+    width: 150px;
+    height: 150px;
+    border-radius: 10px;
+  }
+  a {
+    color: #6a2c70;
+    font-size: 25px;
+    font-family: Cuprum;
+
+    &:hover{
+        color:#F08A5D
+
+    }
+  }
+}

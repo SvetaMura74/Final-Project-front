@@ -1,0 +1,38 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Courgette&family=Cuprum:ital,wght@1,500&family=Indie+Flower&family=Lobster&family=Roboto:ital,wght@1,300&display=swap'); */
+
+//EEECDA rgb(238, 236, 218)
+//F08A5D rgb(240, 138, 93)
+//B83B5E rgb(184, 59, 94)
+//6A2C70 rgb(106, 44, 112)
+
+.quote-cont {
+  height: 500px;
+  background-image: url("../../images/open-book1000.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  figure {
+  /* background-color: #F08A5D;  */
+ 
+    border-radius: 10px;
+    
+  }
+
+  h1 {
+    margin-top: 30px;
+    font-family:  Lobster;
+    color:#F08A5D
+  }
+  .quote {
+    font-family: Lobster;
+    font-size: 35px;
+    margin-top: 30px;
+    
+    
+  }
+  cite {
+    font-size: 20px;
+    color: black;
+    padding: 3px;
+  }
+}
