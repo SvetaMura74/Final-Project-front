@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Courgette&family=Cuprum:ital,wght@1,500&family=Indie+Flower&family=Lobster&family=Roboto:ital,wght@1,300&display=swap');
 
+/* //EEECDA rgb(238, 236, 218)
+//F08A5D rgb(240, 138, 93)
+//B83B5E rgb(184, 59, 94)
+//6A2C70 rgb(106, 44, 112) */
+
 .App {
   text-align: center;
 }
@@ -38,3 +43,7 @@
     transform: rotate(360deg);
   }
 }
+button{
+  color:#6A2C70
+}
+

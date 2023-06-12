@@ -1,58 +1,61 @@
 import { useState, useContext } from "react";
 import AuthContext from "../../context/AuthContext";
 import { Navigate, useNavigate } from "react-router-dom";
-import { SignInFormType } from "../../@types";
+import { SignUpFormType } from "../../@types";
 import * as Yup from "yup";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { ColorRing } from "react-loader-spinner";
 import authService from "../../services/auth.service";
-import Swal from "sweetalert2";
+import Swal from 'sweetalert2'
 
-const SignIn = () => {
+const SignUp = () => {
   const nav = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [errMessage, setErrMessage] = useState(undefined);
-  const { isLoggedIn ,login} = useContext(AuthContext);
-  const initialValues: SignInFormType = {
-   
+  const { isLoggedIn } = useContext(AuthContext);
+  const initialValues: SignUpFormType = {
+    firstName: "",
+    lastName: "",
+    userName: "",
     email: "",
     password: "",
   };
   const validationSchema = Yup.object({
-    
+    firstName: Yup.string().min(3, "name is too short").max(30).required(),
+    lastName: Yup.string().min(3, " last name is too short").max(30).required(),
+    userName: Yup.string().min(3, "user name is too short").max(30).required(),
     email: Yup.string().email("must be a valid email").required(),
     password: Yup.string().min(8, "Password is too short").required(),
   });
 
-  const handleSignIn = (formValues: SignInFormType) => {
+  const handleSignUp = (formValues: SignUpFormType) => {
     setIsLoading(true);
-    const { email, password } = formValues;
+    const { firstName, lastName, userName, email, password } = formValues;
     authService
-      .signIn( email, password)
+      .signUp(firstName, lastName, userName, email, password)
       .then((res) => {
-         console.log(res);
-         const token=res.accessToken;
-         const email= res.email;
-         const username=res.username;
-         login(username,email,token)
-        Swal.fire({
-          title: "You are logged in!",
-          icon: "success",
-        });
-        nav("/books");
+       /*  console.log(res.data); */
+       Swal.fire({
+         title: "Good job!",
+         text: "The User Is Saved!Please Sign In! ",
+         icon: "success",
+       });
+        nav("/signin");
       })
       .catch((e) => {
         /* alert(e);
         setErrMessage(JSON.stringify(e.response.data)); */
         /* setErrMessage( */
-        Swal.fire({
-          icon: "error",
-          title: "Something went wrong!",
-          text: `${JSON.stringify(e.response.data.message)}`,
-        });
-        /*   ); */
+          Swal.fire({
+            icon: "error",
+            title: "Something went wrong!",
+            text: `${JSON.stringify(e.response.data.message)}`,
+            
+          })
+      /*   ); */
+        
       })
-
+      
       .finally(() => {
         setIsLoading(false);
       });
@@ -63,6 +66,7 @@ const SignIn = () => {
   }
 
   return (
+    
     <div>
       {errMessage && <div>${errMessage}</div>}
       {isLoading && (
@@ -80,11 +84,58 @@ const SignIn = () => {
       )}
       <Formik
         initialValues={initialValues}
-        onSubmit={handleSignIn}
+        onSubmit={handleSignUp}
         validationSchema={validationSchema}
       >
         <Form className="w-50 mx-auto">
-          
+          <div>
+            <label htmlFor="firstName" className="form-label">
+              First Name
+            </label>
+            <Field
+              name="firstName"
+              type="firstName"
+              className="form-control"
+              id="firstName"
+            />
+            <ErrorMessage
+              name="firstName"
+              component="div"
+              className="alert alert-danger"
+            />
+          </div>
+          <div>
+            <label htmlFor="lastName" className="form-label">
+              Last Name
+            </label>
+            <Field
+              name="lastName"
+              type="lastName"
+              className="form-control"
+              id="lastName"
+            />
+            <ErrorMessage
+              name="lastName"
+              component="div"
+              className="alert alert-danger"
+            />
+          </div>
+          <div>
+            <label htmlFor="userName" className="form-label">
+              User Name
+            </label>
+            <Field
+              name="userName"
+              type="userName"
+              className="form-control"
+              id="userName"
+            />
+            <ErrorMessage
+              name="userName"
+              component="div"
+              className="alert alert-danger"
+            />
+          </div>
           <div>
             <label htmlFor="email" className="form-label">
               Email
@@ -123,7 +174,7 @@ const SignIn = () => {
               className="btn btn-primary mt-3"
               type="submit"
             >
-              Sign In
+              Sign Up
             </button>
           </div>
         </Form>
@@ -132,4 +183,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default SignUp;
