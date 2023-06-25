@@ -7,6 +7,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import { ColorRing } from "react-loader-spinner";
 import authService from "../../services/auth.service";
 import Swal from "sweetalert2";
+import { urlRegex } from "../../services/utils";
 
 const AddBook = () => {
   const nav = useNavigate();
@@ -28,10 +29,10 @@ const AddBook = () => {
     position: Yup.string().min(1).max(30).required(),
     name: Yup.string().min(3, "book name is too short").max(30).required(),
     author: Yup.string().min(3, "author name is too short").max(30).required(),
-    cover: Yup.string().required(),
+    cover: Yup.string().matches(urlRegex,"must be URL fotmat").required(),
     rating: Yup.number(),
     description: Yup.string()
-      .min(3, "author name is too short")
+      .min(3, "description is too short")
       .max(100)
       .required(),
     genres: Yup.string().min(3).max(30)
@@ -61,7 +62,7 @@ const AddBook = () => {
         genres
       )
       .then((res) => {
-        /*  console.log(res.data); */
+        console.log(res.data);
         Swal.fire({
           title: "Good job!",
           text: "The Book Is Saved",
@@ -236,6 +237,7 @@ const AddBook = () => {
               disabled={isLoading}
               className="btn btn-primary mt-3"
               type="submit"
+             
             >
               Add a Book
             </button>
