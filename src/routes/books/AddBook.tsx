@@ -32,10 +32,10 @@ const AddBook = () => {
     cover: Yup.string().matches(urlRegex,"must be URL fotmat").required(),
     rating: Yup.number(),
     description: Yup.string()
-      .min(3, "description is too short")
+      .min(10, "description is too short")
       .max(100)
       .required(),
-    genres: Yup.string().min(3).max(30)
+    genres: Yup.string().min(5).max(40)
   });
 
   const handleAddBook = (formValues: Books) => {
