@@ -51,7 +51,9 @@ const addBook = (
   description: string,
   genres: string
 ) => {
-  return axios.post(addBookUrl,  {
+  return axios.post(
+    addBookUrl,
+    {
       book_id,
       position,
       name,
@@ -61,6 +63,11 @@ const addBook = (
       description,
       genres,
     },
+    {
+      headers: {
+        'Authorization':token
+      }
+    }
   );
 };
 
