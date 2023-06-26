@@ -65,7 +65,7 @@ const addBook = (
     },
     {
       headers: {
-        'Authorization':token
+        'Authorization':token,
       }
     }
   );

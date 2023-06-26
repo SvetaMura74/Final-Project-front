@@ -27,14 +27,13 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
-        <Route path="/books" element={<Books1/>} />
-        <Route path="/books/:book_id" element={<BookDetails/>} />
-        <Route path="/books/add" element={<AddBook/>} />
-        
+        <Route path="/books" element={<Books1 />} />
+        <Route path="/books/:book_id" element={<BookDetails />} />
+        {isLoggedIn && <Route path="/books/add" element={<AddBook />} />}
+
         <Route path="/search" element={<Search />} />
         {!isLoggedIn && <Route path="/signin" element={<SignIn />} />}
-       {!isLoggedIn &&<Route path="/signup" element={<SignUp1 />} />}
-       
+        {!isLoggedIn && <Route path="/signup" element={<SignUp1 />} />}
       </Routes>
       <Footer />
     </>
