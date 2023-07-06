@@ -1,6 +1,7 @@
 import axios from "axios";
 
 
+
 const baseUrl = "http://localhost:3001/api/auth";
 const signUp = (
   firstName: string,
@@ -71,6 +72,41 @@ const addBook = (
   );
 };
 
-export { signIn, signUp, logOut };
-const authService = { signIn, signUp, logOut, addBook };
+const editBookUrl = "http://localhost:3001/api/books/";
+
+
+const editBook = (
+  book_id: string,
+  position: string,
+  name: string,
+  author: string,
+  cover: string,
+  rating: number,
+  description: string,
+  genres: string
+) => {
+  ;
+  return axios.put(
+    
+    editBookUrl+`/${book_id}`,
+    {
+      book_id,
+      position,
+      name,
+      author,
+      cover,
+      rating,
+      description,
+      genres,
+    },
+    {
+      headers: {
+        'Authorization':token,
+      }
+    }
+  );
+};
+
+export { signIn, signUp, logOut,addBook,editBook };
+const authService = { signIn, signUp, logOut, addBook,editBook };
 export default authService;

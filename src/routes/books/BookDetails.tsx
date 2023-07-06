@@ -7,6 +7,7 @@ import { BsPencil } from "react-icons/bs";
 import { RiDeleteBin5Line } from "react-icons/ri";
 import AuthContext from "../../context/AuthContext";
 import Swal from "sweetalert2";
+
 const BookDetails = () => {
   const { book_id } = useParams();
   const nav = useNavigate();
@@ -32,14 +33,7 @@ const BookDetails = () => {
   }
   const deleteBookHandler = () => {
     const deleteUrl = `http://localhost:3001/api/books/${book_id}`;
-    //const query=book_id
-
-    /* fetch(deleteUrl,{
-      method:'DELETE'
-    })
-    .then((res) => res.json())
-    .then((data)=>{
-      console.log(data); */
+   
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -55,13 +49,10 @@ const BookDetails = () => {
             method: "DELETE",
           })
             .then((res) => res.json())
-            .then((data) => {
-              console.log(data);
+            .then(() => {
               Swal.fire("Deleted!", "Your file has been deleted.", "success");
               nav(-1);
             });
-
-          
         }
       })
 
@@ -104,7 +95,7 @@ const BookDetails = () => {
                 <button
                   className="btn btn-info"
                   onClick={() => {
-                    nav(`edit/${foundBook.book_id}`);
+                    nav(`/books/${book_id}/edit`)
                   }}
                 >
                   Edit

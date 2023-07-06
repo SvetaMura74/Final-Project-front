@@ -15,11 +15,14 @@ import SignUp1 from "./routes/sign up/SignUp1";
 
 import BookDetails from "./routes/books/BookDetails";
 import AddBook from "./routes/books/AddBook";
+import EditBook from "./routes/edit_book/EditBook";
+
 
 
 
 function App() {
   const {isLoggedIn}= useContext(AuthContext)
+
   return (
     <>
       <Navbar1 />
@@ -34,6 +37,9 @@ function App() {
         <Route path="/search" element={<Search />} />
         {!isLoggedIn && <Route path="/signin" element={<SignIn />} />}
         {!isLoggedIn && <Route path="/signup" element={<SignUp1 />} />}
+        {isLoggedIn && (
+          <Route path="/books/:book_id/edit" element={<EditBook />} />
+        )}
       </Routes>
       <Footer />
     </>

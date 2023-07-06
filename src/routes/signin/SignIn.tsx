@@ -42,15 +42,13 @@ const SignIn = () => {
         nav("/books");
       })
       .catch((e) => {
-        /* alert(e);
-        setErrMessage(JSON.stringify(e.response.data)); */
-        /* setErrMessage( */
+       
         Swal.fire({
           icon: "error",
           title: "Something went wrong!",
           text: `${JSON.stringify(e.response.data.message)}`,
         });
-        /*   ); */
+      
       })
 
       .finally(() => {
