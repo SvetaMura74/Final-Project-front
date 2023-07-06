@@ -1,17 +1,17 @@
-import { useEffect, useState ,useContext} from "react";
+import { useEffect, useState, useContext } from "react";
 import { Books } from "../../@types";
 import { useNavigate, useParams } from "react-router-dom";
 import NotFound from "../../components/not-found/NotFound";
 import { GrFavorite } from "react-icons/gr";
 import { BsPencil } from "react-icons/bs";
-import {RiDeleteBin5Line} from "react-icons/ri"
+import { RiDeleteBin5Line } from "react-icons/ri";
 import AuthContext from "../../context/AuthContext";
-
+import Swal from "sweetalert2";
 const BookDetails = () => {
   const { book_id } = useParams();
   const nav = useNavigate();
-   const { isLoggedIn } = useContext(AuthContext);
-   const { isAdmin } = useContext(AuthContext);
+  const { isLoggedIn } = useContext(AuthContext);
+  const { isAdmin } = useContext(AuthContext);
 
   const [books, setBooks] = useState<Books[]>([]);
   useEffect(() => {
@@ -30,6 +30,45 @@ const BookDetails = () => {
   if (foundBook === undefined) {
     return <NotFound />;
   }
+  const deleteBookHandler = () => {
+    const deleteUrl = `http://localhost:3001/api/books/${book_id}`;
+    //const query=book_id
+
+    /* fetch(deleteUrl,{
+      method:'DELETE'
+    })
+    .then((res) => res.json())
+    .then((data)=>{
+      console.log(data); */
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    })
+      .then((result) => {
+        if (result.isConfirmed) {
+          fetch(deleteUrl, {
+            method: "DELETE",
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              console.log(data);
+              Swal.fire("Deleted!", "Your file has been deleted.", "success");
+              nav(-1);
+            });
+
+          
+        }
+      })
+
+      .catch((e) => {
+        console.log(e);
+      });
+  };
 
   return (
     <div>
@@ -50,15 +89,17 @@ const BookDetails = () => {
               >
                 Go Back
               </button>
-              {isLoggedIn &&(<button
-                className="btn btn-secondary"
-                onClick={() => {
-                  nav("/");
-                }}
-              >
-                Add to
-                <GrFavorite />
-              </button>)}
+              {isLoggedIn && (
+                <button
+                  className="btn btn-secondary"
+                  onClick={() => {
+                    nav("/");
+                  }}
+                >
+                  Add to
+                  <GrFavorite />
+                </button>
+              )}
               {isAdmin && (
                 <button
                   className="btn btn-info"
@@ -74,7 +115,7 @@ const BookDetails = () => {
                 <button
                   className="btn btn-success"
                   onClick={() => {
-                    nav(`edit/${foundBook.book_id}`);
+                    deleteBookHandler();
                   }}
                 >
                   Delete
